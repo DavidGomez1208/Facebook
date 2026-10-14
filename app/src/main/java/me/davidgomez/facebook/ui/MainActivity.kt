@@ -1,24 +1,15 @@
-package me.davidgomez.facebook
+package me.davidgomez.facebook.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
-import androidx.navigation.NavHost
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import me.davidgomez.facebook.ui.theme.Login
-import me.davidgomez.facebook.ui.theme.Register
-import me.davidgomez.facebook.ui.theme.FacebookTheme
+import me.davidgomez.facebook.ui.screens.FeedScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,11 +22,22 @@ class MainActivity : ComponentActivity() {
                 startDestination = "login",
                 modifier = Modifier.fillMaxSize()
             ) {
-                composable(route = "login"){
-                    Login(NavController = myNavController)
+                composable(route = "login") {
+                    Login(onClickRegister = {
+                        myNavController.navigate("Register")
+                    },
+                        onClickIniciarSesion = {
+                            myNavController.navigate("feed")
+                        }
+                    )
                 }
                 composable(route = "register") {
-                    Register(NavController = myNavController)
+                    Register(onClickBack = {
+                        myNavController.popBackStack()
+                    })
+                }
+                composable(route = "feed") {
+                    FeedScreen()
                 }
             }
         }

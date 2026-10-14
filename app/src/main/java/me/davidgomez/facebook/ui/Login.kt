@@ -1,6 +1,5 @@
-package me.davidgomez.facebook.ui.theme
+package me.davidgomez.facebook.ui
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
@@ -11,18 +10,15 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 
 // Colores oficiales de Facebook
 val FacebookBlue = Color(0xFF1877F2)
@@ -33,7 +29,7 @@ private val FacebookTextGray = Color(0xFF606770)
 private val FacebookDarkText = Color(0xFF1C1E21)
 
 @Composable
-fun Login(NavController: NavController) {
+fun Login(onClickRegister: () -> Unit, onClickIniciarSesion: () -> Unit) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
@@ -87,8 +83,7 @@ fun Login(NavController: NavController) {
         // Botón Iniciar sesión
         Button(
             onClick = {
-                NavController.navigate("Register")
-
+                onClickIniciarSesion()
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -145,7 +140,10 @@ fun Login(NavController: NavController) {
 
         // Botón Crear cuenta nueva
         Button(
-            onClick = {},
+            onClick = {
+                onClickRegister()
+
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp),
