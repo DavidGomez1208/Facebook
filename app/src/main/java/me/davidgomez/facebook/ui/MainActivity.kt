@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import me.davidgomez.facebook.ui.screens.FeedScreen
+import me.davidgomez.facebook.ui.screens.Recuperación
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,9 +26,12 @@ class MainActivity : ComponentActivity() {
                 composable(route = "login") {
                     Login(onClickRegister = {
                         myNavController.navigate("Register")
-                    },
+                        },
                         onClickIniciarSesion = {
                             myNavController.navigate("feed")
+                        },
+                        onClickRecuperación = {
+                            myNavController.navigate("recuperar")
                         }
                     )
                 }
@@ -38,6 +42,9 @@ class MainActivity : ComponentActivity() {
                 }
                 composable(route = "feed") {
                     FeedScreen()
+                }
+                composable(route = "recuperar") {
+                    Recuperación()
                 }
             }
         }

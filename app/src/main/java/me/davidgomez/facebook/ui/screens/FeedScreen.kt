@@ -19,7 +19,6 @@ fun FeedScreen(){
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize()
     ) {
-
         Text(
             "Aquí será el feed",
             fontSize = 50.sp
